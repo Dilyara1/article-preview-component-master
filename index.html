@@ -5,32 +5,95 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
   <title>Frontend Mentor | Article preview component</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/js/tailwind.config.js"></script>
 </head>
-<body>
+<body class="bg-LightGrayishBlue font-Manrope min-h-screen p-0 m-0 flex items-center justify-center flex-col">
+  <main class="px-8 py-16">
+    <section>
+      <article class="bg-white shadow-xl rounded-lg flex md:flex-row flex-col md:max-w-[730px] md:max-h[300px]">
+        <div class="md:max-w-[350px]">
+          <img class="object-fill rounded-t-lg w-full md:h-full md:rounded-s-lg md:rounded-tr-none block" src="./images/drawers.jpg" alt="drawers" />
+        </div>
+        <div class="relative z-2">
+          <div class="px-12 pt-10 pb-8 md:pt-8 md:pb-0">
+            <h1 class="text-base md:text-xl text-VeryDarkGrayishBlue font-bold">Shift the overall look and feel by adding these wonderful 
+              touches to furniture in your home</h1>
+            <p class="text-sm pt-6 font-normal text-DesaturatedDarkBlue">Ever been in a room and felt like something was missing? Perhaps 
+              it felt slightly bare and uninviting. I’ve got some simple tips 
+              to help you make any room feel complete.</p>
+          </div>
+          <figure id="authorDesc" class="px-12 py-8 md:pt-8 md:pb-8 flex items-center">
+            <div class="flex gap-4 col-span-2 flex-wrap">
+              <img class="rounded-full size-12" src="./images/avatar-michelle.jpg" alt="Michelle" />
+              <figcaption>
+                <h2 class="text-lg text-VeryDarkGrayishBlue font-medium">Michelle Appleton</h2>
+                <p class="text-base text-GrayishBlue">28 Jun 2020</p>
+              </figcaption>
+            </div>
+            <button class="cursor-pointer bg-LightGrayishBlue size-10 flex justify-center items-center rounded-full justify-self-end ml-auto" onclick="handleShare()">
+              <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15 13"><path fill="#6E8098" d="M15 6.495L8.766.014V3.88H7.441C3.33 3.88 0 7.039 0 10.936v2.049l.589-.612C2.59 10.294 5.422 9.11 8.39 9.11h.375v3.867L15 6.495z"/></svg>
+            </button>
+          </figure>
+          <div id="shareDesc" class="bg-VeryDarkGrayishBlue rounded-b-lg py-8 hidden px-12  md:p-4 flex md:rounded-lg items-center md:absolute md:bottom-[100px] md:right-[-50px]">
+            <div  class="flex gap-8 col-span-2 items-center flex-wrap">
+              <p class="text-xl uppercase text-GrayishBlue"> Share</p>
+              <ul class="flex gap-6 flex-wrap">
+                <li class="shrink-0"><a><img class="size-6 cursor-pointer" src="./images/icon-facebook.svg" alt="facebook"/></a></li>
+                <li class="shrink-0"><a><img class="size-6 cursor-pointer" src="./images/icon-twitter.svg" alt="twitter"/></a></li>
+                <li class="shrink-0"><a><img class="size-6 cursor-pointer" src="./images/icon-pinterest.svg" alt="pinterest"/></a></li>
+              </ul>
+            </div>
+            <button id="shareButton" class="bg-DesaturatedDarkBlue size-10 flex justify-center items-center rounded-full justify-self-end md:hidden ml-auto" onclick="handleShare()">
+              <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15 13"><path fill="white" d="M15 6.495L8.766.014V3.88H7.441C3.33 3.88 0 7.039 0 10.936v2.049l.589-.612C2.59 10.294 5.422 9.11 8.39 9.11h.375v3.867L15 6.495z"/></svg>
+            </button>
+          </div>
+          <div id="shareArrow" class="hidden w-0 h-0 border-l-[10px] border-r-[10px] border-l-transparent border-r-transparent border-t-[12px] border-t-VeryDarkGrayishBlue absolute md:bottom-[90px] md:right-[58px] opacity-0 md:opacity-100"></div>
+        </div>
+      </article>
+    </section>
+  </main>
 
-  Shift the overall look and feel by adding these wonderful 
-  touches to furniture in your home
-
-  Ever been in a room and felt like something was missing? Perhaps 
-  it felt slightly bare and uninviting. I’ve got some simple tips 
-  to help you make any room feel complete.
-
-  Michelle Appleton
-  28 Jun 2020
-
-  Share
   
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
   </div>
+  <script>
+    function handleShare() {
+      const authorDesc = document.querySelector('#authorDesc')
+      const shareDesc = document.querySelector('#shareDesc')
+      const shareButton = document.querySelector('#shareButton')
+      const shareArrow = document.querySelector('#shareArrow')
+      const computedOpacity = window.getComputedStyle(shareArrow).opacity;
+      console.log(computedOpacity === '1')
+      if (computedOpacity === '1' ) {
+        if (!shareDesc.classList.contains('hidden')) {
+        
+          shareDesc.classList.add('hidden')
+          shareArrow.classList.add('hidden')
+        } else {
+         
+            shareDesc.classList.remove('hidden')
+            shareArrow.classList.remove('hidden')
+        }
+       
+      } else {
+        if(!shareDesc.classList.contains('hidden')) {
+          console.log('here')
+          authorDesc.style.display = 'flex'
+          shareDesc.classList.add('hidden')
+        }
+         else {
+          authorDesc.style.display = 'none'
+          shareDesc.classList.remove('hidden')
+         }
+      }
+    }
+  </script>
 </body>
 </html>
